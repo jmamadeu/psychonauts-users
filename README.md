@@ -1,6 +1,6 @@
 ## Psychonauts Users
 
-List, Like and deslike users from [Psychonauts API](https://psychonauts-api.netlify.app/)
+list, search, like, and dislike users from psychonauts users API [Psychonauts API](https://psychonauts-api.netlify.app/)
 
 [See how it looks like](https://psychonauts-users-jmamadeu.vercel.app/)
 
