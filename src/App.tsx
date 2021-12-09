@@ -1,17 +1,21 @@
 import {
-  Avatar,
   Box,
-  Button,
   Container,
   Divider,
   Input,
   InputGroup,
   InputRightAddon,
   Link,
+  Spinner,
   Text
 } from "@chakra-ui/react";
+import { UserList } from "./components/user-list";
+import { useFetchUsers } from "./hooks/useFetchUsers";
 
 function App() {
+  const { data, isLoading, error } = useFetchUsers();
+  console.log(data);
+
   return (
     <>
       <Box as="header" display="flex" justifyContent="space-between" p={8}>
@@ -48,40 +52,18 @@ function App() {
           marginTop={10}
           justifyContent="space-between"
         >
-          <Box as="section">
-            <Box as="article" display="flex" alignItems="center">
-              <Avatar
-                size="2xl"
-                name="Christian Nwamba"
-                src="https://bit.ly/code-beast"
-              />
-              <Box as="div" marginLeft={10}>
-                <Text>Male</Text>
-                <Text>Mateus Aalexandre</Text>
-
-                <Button marginTop={10}>Details</Button>
-              </Box>
+          {isLoading && (
+            <Box justifyContent="center" display="flex" width="100%">
+              <Spinner size="xl" />
             </Box>
-          </Box>
-          <Box as="section">
-            <Box as="article" display="flex" alignItems="center">
-              <Avatar
-                size="2xl"
-                name="Christian Nwamba"
-                src="https://bit.ly/code-beast"
-              />
-              <Box as="div" marginLeft={10}>
-                <Text>Male</Text>
-                <Text>Mateus Aalexandre</Text>
+          )}
 
-                <Button marginTop={10}>Details</Button>
-              </Box>
-            </Box>
-          </Box>
-        </Box>
-
-        <Box display="flex" justifyContent="center" marginTop={10}>
-          <Button>Load more</Button>
+          {!isLoading && !error && data ? (
+            <>
+              <UserList users={data?.slice(0, data.length / 2)} />
+              <UserList users={data?.slice(data.length / 2)} />
+            </>
+          ) : null}
         </Box>
       </Container>
     </>
