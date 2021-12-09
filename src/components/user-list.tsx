@@ -43,7 +43,7 @@ export const UserList = ({ users }: UserListProps) => {
         ))}
       </Box>
 
-      <Modal isOpen={isOpen} onClose={onClose} isCentered size="lg">
+      <Modal isOpen={isOpen} onClose={onClose} isCentered size="xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
