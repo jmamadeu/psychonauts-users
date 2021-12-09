@@ -17,6 +17,7 @@ import {
   useDisclosure
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { useFavoriteUserIds } from "../contexts/favorites-users";
 import { UserProperties } from "../models/user";
 import { UserCard } from "./user-card";
 
@@ -27,25 +28,16 @@ type UserListProps = {
 export const UserList = ({ users }: UserListProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedUser, setSelectedUser] = useState<UserProperties>();
-  const [usersFavoritesIds, setUsersFavoritesIds] = useState<string[]>([]);
+  const { favoriteIds, favoriteClickHandler } = useFavoriteUserIds();
 
   const usersParsed = users.map((user) => ({
     ...user,
-    isFavorite: !!usersFavoritesIds.find((id) => id === user._id)
+    isFavorite: !!favoriteIds.find((id) => id === user._id)
   }));
 
   const cardDetailsHandler = (user: UserProperties) => {
     setSelectedUser(user);
     onOpen();
-  };
-
-  const favoriteClickHandler = (id: UserProperties["_id"]) => {
-    setUsersFavoritesIds((currentIds) => {
-      if (currentIds.find((currentId) => currentId === id))
-        return currentIds.filter((currentId) => id !== currentId);
-
-      return [...currentIds, id];
-    });
   };
 
   return (
