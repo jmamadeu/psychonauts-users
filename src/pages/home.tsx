@@ -7,16 +7,15 @@ import {
   Input,
   InputGroup,
   InputRightAddon,
-  Link,
-  Spinner,
-  Text
+  Spinner
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { UserList } from "./components/user-list";
-import { useDebounce } from "./hooks/use-debounce";
-import { useFetchUsers } from "./hooks/use-fetch-users";
+import { Header } from "../components/header";
+import { UserList } from "../components/user-list";
+import { useDebounce } from "../hooks/use-debounce";
+import { useFetchUsers } from "../hooks/use-fetch-users";
 
-function App() {
+export function Home() {
   const [searchUserName, setSearchUserName] = useState("");
   const debouncedSearchTerm: string = useDebounce<string>(searchUserName, 500);
   const { data, isLoading, error } = useFetchUsers({
@@ -29,24 +28,7 @@ function App() {
 
   return (
     <>
-      <Box as="header" display="flex" justifyContent="space-between" p={8}>
-        <Text
-          textTransform="uppercase"
-          color="gray.600"
-          fontWeight="bold"
-          fontSize="lg"
-        >
-          Psychonauts-users
-        </Text>
-        <Box as="div">
-          <Link textTransform="uppercase" color="gray.900">
-            Home
-          </Link>
-          <Link textTransform="uppercase" color="gray.600" marginLeft={16}>
-            Favorites
-          </Link>
-        </Box>
-      </Box>
+      <Header />
       <Divider />
 
       <Container marginTop={5} maxW="container.sm">
@@ -92,5 +74,3 @@ function App() {
     </>
   );
 }
-
-export default App;
