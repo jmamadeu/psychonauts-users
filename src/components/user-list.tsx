@@ -27,18 +27,37 @@ type UserListProps = {
 export const UserList = ({ users }: UserListProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedUser, setSelectedUser] = useState<UserProperties>();
+  const [usersFavoritesIds, setUsersFavoritesIds] = useState<string[]>([]);
+
+  const usersParsed = users.map((user) => ({
+    ...user,
+    isFavorite: !!usersFavoritesIds.find((id) => id === user._id)
+  }));
 
   const cardDetailsHandler = (user: UserProperties) => {
     setSelectedUser(user);
     onOpen();
   };
 
+  const favoriteClickHandler = (id: UserProperties["_id"]) => {
+    setUsersFavoritesIds((currentIds) => {
+      if (currentIds.find((currentId) => currentId === id))
+        return currentIds.filter((currentId) => id !== currentId);
+
+      return [...currentIds, id];
+    });
+  };
+
   return (
     <>
       <Box as="section">
-        {users?.map((user, index) => (
+        {usersParsed?.map((user, index) => (
           <Box key={user._id} marginTop={index > 0 ? 10 : 0}>
-            <UserCard onDetailsClick={cardDetailsHandler} user={user} />
+            <UserCard
+              onFavoriteClick={favoriteClickHandler}
+              onDetailsClick={cardDetailsHandler}
+              user={user}
+            />
           </Box>
         ))}
       </Box>

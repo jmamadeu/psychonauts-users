@@ -27,8 +27,6 @@ function App() {
     setSearchUserName(event.target.value);
   };
 
-  console.log(data, error);
-
   return (
     <>
       <Box as="header" display="flex" justifyContent="space-between" p={8}>

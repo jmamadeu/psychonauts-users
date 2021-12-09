@@ -4,6 +4,7 @@ export type UserProperties = {
   name: string;
   gender: string;
   psiPowers: Array<PSIPowersProperties>;
+  isFavorite?: boolean;
 };
 
 export type PSIPowersProperties = Omit<UserProperties, "gender"> & {

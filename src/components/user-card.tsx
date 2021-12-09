@@ -5,7 +5,7 @@ import { UserProperties } from "../models/user";
 type UserCardProps = {
   user: UserProperties;
   onDetailsClick?: (user: UserProperties) => void;
-  onFavoriteClick?: (user: UserProperties) => void;
+  onFavoriteClick?: (id: UserProperties["_id"]) => void;
 };
 
 export const UserCard = ({
@@ -24,9 +24,9 @@ export const UserCard = ({
         <IconButton
           marginLeft={4}
           aria-label="icon"
-          onClick={() => onFavoriteClick(user)}
+          onClick={() => onFavoriteClick(user._id)}
         >
-          <FiStar size={20} color="#975A16" />
+          <FiStar size={20} color={user.isFavorite ? "#975A16" : ""} />
         </IconButton>
       </Box>
 
