@@ -22,7 +22,7 @@ To run this web app you must need to install
 - [NodeJS](https://nodejs.org/en/)
 - [Yarn](https://yarnpkg.com/) Optional
 
-After that go to your project folder and run:
+After that, go to your project folder and run:
 
 ```bash
 $ yarn # To install the dependencies
